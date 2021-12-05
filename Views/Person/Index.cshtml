@@ -1,0 +1,67 @@
+﻿@model IEnumerable<folk.Models.PersonModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class=" d-flex justify-content-end   align-items-end mr-0 ">
+    <p id="ports" class="border border-danger rounded p-2 bg-info text-center  w-25">
+        <a asp-action="Create" class="text-white">Create Person</a>
+    </p>
+</div>
+<br />
+<div class="d-flex  p-0 justify-content-end align-items-end ">
+    <form asp-controller="Person" asp-action="Index" class="w-50 btn-info p-3 border border-danger">
+        <span class="btn-group  d-flex">
+            <input class="form-control" type="text" name="SearchText" placeholder="Search">
+            <input class="p-1 px-4 ml-2 btn btn-sm btn-danger" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+<br />
+<div class="d-flex justify-content-end   align-items-end mb-5">
+    <div class="w-75 bg-info border border-danger d-flex justify-content-end   align-items-end">
+        <table class=" table m-4 bg-light w-100">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonPhone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonPhone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City.Name)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.PersonId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.PersonId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.PersonId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

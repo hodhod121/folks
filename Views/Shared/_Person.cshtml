@@ -1,0 +1,42 @@
+﻿@model folk.Models.PersonModel
+    <td>
+        @Html.DisplayFor(modelItem => Model.PersonName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.PersonPhone)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Country.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.City.Name)
+    </td>
+    <td>
+       
+        @*<form asp-action="EditPerson" asp-route-id="@Model.PersonId" class="d-inline-block"
+              data-ajax="true"
+              data-ajax-update="#DivDetailView"
+              data-ajax-success="ShowDetailForm()">
+            <button type="submit" class="btn btn-sm btn-info ml-1" >
+                Edit
+            </button>
+        </form>*@
+      
+        <form asp-action="ViewPerson" asp-route-id="@Model.PersonId" class="d-inline-block"
+              data-ajax="true"
+              data-ajax-update="#DivDetailView"
+              data-ajax-success="ShowDetailForm()">
+            <button type="submit" class="btn btn-sm btn-primary ml-1">
+                Details
+            </button>
+        </form>
+      
+        <form asp-action="DeletePerson" asp-route-id="@Model.PersonId"
+              data-ajax="true" data-ajax-success="deleteItem(this)" class="d-inline-block">
+            <button type="submit" class="btn btn-sm btn-danger ml-1"
+                    onclick="return confirm('Delete confirmation for person @Model.PersonId');">
+                Delete
+            </button>
+        </form>
+    </td>
+

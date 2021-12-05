@@ -1,0 +1,44 @@
+﻿@model folk.Models.PersonModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="d-flex justify-content-center align-items-center text-center flex-column">
+    <h4>PersonModel</h4>
+    <hr />
+    <dl class="row w-50 bg-info">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonPhone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonPhone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+    </dl>
+    <div class="mt-4 text-center">
+        <a class="btn btn-primary px-4" onclick="CloseDetailForm();" data-icon="back">Back</a>
+    </div>
+</div>
+
+
+

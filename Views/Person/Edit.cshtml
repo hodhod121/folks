@@ -1,0 +1,76 @@
+﻿@model folk.Models.PersonModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PersonModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PersonId" />
+            <div class="form-group">
+                <label asp-for="PersonName" class="control-label"></label>
+                <input asp-for="PersonName" class="form-control" />
+                <span asp-validation-for="PersonName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonPhone" class="control-label"></label>
+                <input asp-for="PersonPhone" class="form-control" />
+                <span asp-validation-for="PersonPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryCode" class="control-label"></label>
+                <select id="lstCountry" asp-for="CountryCode" class="form-control" asp-items="ViewBag.CountryCode"></select>
+                <span asp-validation-for="CountryCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityCode" class="control-label"></label>
+                <select id="lstCity" asp-for="CityCode" class="form-control" asp-items="ViewBag.CityCode"></select>
+                <span asp-validation-for="CityCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#lstCountry').change(function () {
+                var selectedCountry = $("#lstCountry").val();
+                var citysSelect = $('#lstCity');
+                citysSelect.empty();
+                if (selectedCountry != null && selectedCountry != '') {
+                    $.getJSON('@Url.Action("GetCities")', { CountryCode: selectedCountry }, function (cities) {
+                        if (cities != null && !jQuery.isEmptyObject(cities)) {
+                            citysSelect.append($('<option/>', {
+                                value: null,
+                                text: "Select City"
+                            }));
+                            $.each(cities, function (index, city) {
+                                citysSelect.append($('<option/>', {
+                                    value: city.value,
+                                    text: city.text
+                                }));
+                            })
+                        };
+                    });
+                }
+            });
+        });
+    </script>
+}
+
